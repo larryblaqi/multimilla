@@ -38,8 +38,8 @@ workflows:
 
     artifacts:
       - ios/App/build/App.ipa
-      - build/ios/ipa/*.ipa
-      - *.ipa
+      - "build/ios/ipa/*.ipa"
+      - "*.ipa"
 
     publishing:
       email:

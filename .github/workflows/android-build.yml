@@ -25,24 +25,30 @@ jobs:
           java-version: '17'
 
       - name: Install Node Dependencies
-        run: npm install
+        run: |
+          cd Archive
+          npm install
 
       - name: Build Vue Production Web App
-        run: npm run build
+        run: |
+          cd Archive
+          npm run build
 
       - name: Sync Capacitor Android Assets
-        run: npx cap sync android
+        run: |
+          cd Archive
+          npx cap sync android
 
       - name: Grant Execute Permission to Gradle Wrapper
-        run: chmod +x android/gradlew
+        run: chmod +x Archive/android/gradlew
 
       - name: Build Android APK Package
         run: |
-          cd android
+          cd Archive/android
           ./gradlew assembleDebug --stacktrace
 
       - name: Upload Android APK Artifact
         uses: actions/upload-artifact@v3
         with:
           name: multimilla-android-app
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: Archive/android/app/build/outputs/apk/debug/app-debug.apk

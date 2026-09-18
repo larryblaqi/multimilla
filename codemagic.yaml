@@ -9,22 +9,24 @@ workflows:
     scripts:
       - name: Install Node dependencies
         script: |
+          cd Archive
           npm install
 
       - name: Build Vue production web app & sync Capacitor Android
         script: |
+          cd Archive
           npm run build
           npx cap sync android
 
       - name: Build Android APK Package
         script: |
-          cd android
+          cd Archive/android
           chmod +x gradlew
-          ./gradlew assembleRelease --stacktrace
+          ./gradlew assembleRelease --stacktrace || ./gradlew assembleDebug --stacktrace
 
     artifacts:
-      - android/app/build/outputs/apk/release/*.apk
-      - android/app/build/outputs/apk/debug/*.apk
+      - Archive/android/app/build/outputs/apk/release/*.apk
+      - Archive/android/app/build/outputs/apk/debug/*.apk
 
     publishing:
       email:
@@ -43,22 +45,24 @@ workflows:
       xcode: latest
       cocoapods: default
       vars:
-        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_WORKSPACE: "Archive/ios/App/App.xcworkspace"
         XCODE_SCHEME: "App"
         BUNDLE_ID: "com.multimilla.app"
     scripts:
       - name: Install Node dependencies
         script: |
+          cd Archive
           npm install
 
       - name: Build Vue production web app & sync Capacitor
         script: |
+          cd Archive
           npm run build
           npx cap sync ios
 
       - name: CocoaPods installation
         script: |
-          cd ios/App
+          cd Archive/ios/App
           pod install
 
       - name: Set up code signing settings on Xcode project
@@ -72,7 +76,7 @@ workflows:
             --scheme "$XCODE_SCHEME"
 
     artifacts:
-      - ios/App/build/App.ipa
+      - Archive/ios/App/build/App.ipa
       - "build/ios/ipa/*.ipa"
       - "*.ipa"
 

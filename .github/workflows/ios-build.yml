@@ -1,0 +1,46 @@
+name: Build Multimilla iOS App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Node Dependencies
+        run: |
+          cd Archive
+          npm install
+
+      - name: Build Vue Production Web App & Sync Capacitor iOS
+        run: |
+          cd Archive
+          npm run build
+          npx cap sync ios
+
+      - name: Install CocoaPods
+        run: |
+          cd Archive/ios/App
+          pod install
+
+      - name: Build iOS Xcode Project
+        run: |
+          cd Archive/ios/App
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos -allowProvisioningUpdates || true
+
+      - name: Upload iOS Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: multimilla-ios-app
+          path: Archive/ios/App

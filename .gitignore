@@ -9,6 +9,8 @@ dist/
 build/
 *.zip
 *.apk
+!Archive/public/android/multimilla.apk
+!lsapp/public/android/multimilla.apk
 *.aab
 *.ipa
 

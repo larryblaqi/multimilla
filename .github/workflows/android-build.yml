@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: Setup Java JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
@@ -47,8 +47,16 @@ jobs:
           cd Archive/android
           ./gradlew assembleDebug --stacktrace
 
+      - name: Copy Built APK to Release Location
+        run: |
+          mkdir -p lsapp/public/android
+          mkdir -p Archive/public/android
+          cp Archive/android/app/build/outputs/apk/debug/app-debug.apk lsapp/public/android/multimilla.apk
+          cp Archive/android/app/build/outputs/apk/debug/app-debug.apk Archive/public/android/multimilla.apk
+
       - name: Upload Android APK Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: multimilla-android-app
           path: Archive/android/app/build/outputs/apk/debug/app-debug.apk
+

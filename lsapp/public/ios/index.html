@@ -2,16 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#dc2626">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Multimilla">
-  <title>Download & Install Multimilla iOS App</title>
+  <title>Install Multimilla on iOS (iPhone & iPad)</title>
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="shortcut icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/icons/icon-192.png">
   <style>
     * {
       box-sizing: border-box;
@@ -20,54 +19,109 @@
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     body {
-      background-color: #f8fafc;
-      color: #0f172a;
+      background-color: #f2f2f7;
+      color: #1c1c1e;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
       align-items: center;
       justify-content: center;
       padding: 24px 16px;
+      -webkit-font-smoothing: antialiased;
     }
     .card {
-      background: #ffffff;
-      max-width: 480px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      max-width: 440px;
       width: 100%;
       border-radius: 24px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
       padding: 32px 24px;
       text-align: center;
-      border: 1px solid #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.6);
     }
     .logo-container {
-      width: 76px;
-      height: 76px;
-      background: #dc2626;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
       border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 20px;
-      box-shadow: 0 10px 20px rgba(220, 38, 38, 0.3);
+      box-shadow: 0 10px 24px rgba(220, 38, 38, 0.35);
     }
     .logo-text {
       color: #ffffff;
-      font-size: 38px;
+      font-size: 42px;
       font-weight: 800;
+      letter-spacing: -1px;
     }
     h1 {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
-      color: #0f172a;
+      color: #1c1c1e;
       margin-bottom: 8px;
+      letter-spacing: -0.5px;
     }
     p.subtitle {
-      font-size: 14px;
-      color: #64748b;
-      line-height: 1.5;
-      margin-bottom: 24px;
+      font-size: 15px;
+      color: #8e8e93;
+      line-height: 1.4;
+      margin-bottom: 28px;
     }
-    .btn-download {
+    .instructions {
+      text-align: left;
+      background: #f8f8fa;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #e5e5ea;
+    }
+    .instructions h2 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #8e8e93;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .step:last-child {
+      margin-bottom: 0;
+    }
+    .step-num {
+      background: #fee2e2;
+      color: #dc2626;
+      font-size: 13px;
+      font-weight: 700;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-text {
+      font-size: 14px;
+      color: #3a3a3c;
+      line-height: 1.45;
+    }
+    .step-icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 20px;
+      height: 20px;
+      fill: #007aff;
+    }
+    .btn-launch {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -80,85 +134,18 @@
       padding: 16px 24px;
       border-radius: 14px;
       width: 100%;
-      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.4);
-      transition: all 0.2s ease;
-      border: none;
-      cursor: pointer;
-      margin-bottom: 12px;
-    }
-    .btn-download:hover, .btn-download:active {
-      background: #b91c1c;
-      transform: translateY(-1px);
-    }
-    .btn-secondary {
-      background: #f1f5f9;
-      color: #334155;
-      box-shadow: none;
-      border: 1px solid #cbd5e1;
-    }
-    .btn-secondary:hover {
-      background: #e2e8f0;
-    }
-    .btn-icon {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-    .instructions {
+      box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35);
       margin-top: 24px;
-      text-align: left;
-      background: #f8fafc;
-      border-radius: 16px;
-      padding: 20px;
-      border: 1px solid #f1f5f9;
+      transition: all 0.2s ease;
     }
-    .instructions h2 {
-      font-size: 13px;
-      font-weight: 700;
-      color: #334155;
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .step {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .step:last-child {
-      margin-bottom: 0;
-    }
-    .step-num {
-      background: #fee2e2;
-      color: #dc2626;
-      font-size: 12px;
-      font-weight: 700;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .step-text {
-      font-size: 13px;
-      color: #475569;
-      line-height: 1.4;
-    }
-    .share-icon {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      vertical-align: middle;
-      fill: #2563eb;
+    .btn-launch:active {
+      transform: scale(0.98);
+      background: #b91c1c;
     }
     .footer {
       margin-top: 24px;
       font-size: 12px;
-      color: #94a3b8;
+      color: #8e8e93;
     }
   </style>
 </head>
@@ -169,38 +156,44 @@
       <span class="logo-text">M</span>
     </div>
 
-    <h1>Install Multimilla iOS App</h1>
-    <p class="subtitle">Install the official Multimilla mobile app on your iPhone or iPad for full native performance.</p>
-
-    <a href="/ios/multimilla.ipa" download="multimilla.ipa" id="downloadIpaBtn" class="btn-download">
-      <svg class="btn-icon" viewBox="0 0 24 24">
-        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.85c.67-.82 1.13-1.96.99-3.11-.97.04-2.17.65-2.86 1.46-.61.72-1.15 1.88-.99 3.01 1.09.08 2.22-.55 2.86-1.36z"/>
-      </svg>
-      Download iOS Package (.IPA)
-    </a>
+    <h1>Install Multimilla on iOS</h1>
+    <p class="subtitle">Install Multimilla directly onto your iPhone or iPad home screen with full native mobile performance.</p>
 
     <div class="instructions">
-      <h2>iPhone Installation Guide</h2>
+      <h2>iOS Installation Wizard</h2>
       
       <div class="step">
         <span class="step-num">1</span>
-        <span class="step-text">Tap the <strong>Share button</strong> <svg class="share-icon" viewBox="0 0 24 24"><path d="M16 5l-1.42 1.42-1.59-1.59V16h-2V4.83L9.41 6.42 8 5l5-5 5 5zm4 7v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h3v2H6v9h12v-9h-3v-2h3a2 2 0 0 1 2 2z"/></svg> at the bottom of Safari browser.</span>
+        <span class="step-text">Open this page in <strong>Safari</strong> on your iPhone or iPad.</span>
       </div>
       
       <div class="step">
         <span class="step-num">2</span>
-        <span class="step-text">Scroll down and select <strong>"Add to Home Screen"</strong>.</span>
+        <span class="step-text">Tap the <strong>Share</strong> button 
+          <svg class="step-icon" viewBox="0 0 24 24">
+            <path d="M16 5l-4-4-4 4h3v9h2V5h3zm4 5v11H4V10h4v2H6v7h12v-7h-2v-2h4z"/>
+          </svg> at the bottom of Safari screen.
+        </span>
       </div>
 
       <div class="step">
         <span class="step-num">3</span>
-        <span class="step-text">Tap <strong>Add</strong> in the top-right corner to launch Multimilla directly from your iPhone home screen!</span>
+        <span class="step-text">Scroll down the menu and tap <strong>"Add to Home Screen"</strong>.</span>
+      </div>
+
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-text">Tap <strong>Add</strong> in the top-right corner. Multimilla is now installed on your iOS home screen!</span>
       </div>
     </div>
+
+    <a href="/" class="btn-launch">
+      Launch Web App Directly
+    </a>
   </div>
 
   <div class="footer">
-    Multimilla Mobile iOS © 2026. All Rights Reserved.
+    Multimilla iOS © 2026. Optimized for iOS 14.0+
   </div>
 
 </body>

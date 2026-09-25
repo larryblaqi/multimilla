@@ -31,21 +31,8 @@ if ('serviceWorker' in navigator && (import.meta.env.PROD || window.location.pro
   });
 }
 
-// Handle PWA Install Prompt Trigger
-let deferredPrompt: any = null;
+// PWA install prompts disabled per design requirement
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
-  deferredPrompt = e;
-  (window as any).deferredPwaPrompt = e;
-
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('pwa_install') === 'true' || urlParams.get('install_prompt') === '1') {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult: any) => {
-      console.log('PWA install choice:', choiceResult.outcome);
-      deferredPrompt = null;
-      (window as any).deferredPwaPrompt = null;
-    });
-  }
 });
 

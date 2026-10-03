@@ -137,7 +137,7 @@ const navigateToSummary = (transactionId) => {
         v-for="(transaction, index) in recentTransactions"
         :key="transaction.id"
         @click="navigateToSummary(transaction.id)"
-        class="flex items-center justify-between mb-3 p-4 bg-white rounded-lg shadow-sm border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+        class="flex items-center justify-between mb-3 p-4 bg-white rounded-2xl shadow-sm border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-200"
       >
         <div class="flex items-center gap-3">
           <div class="p-2 rounded-full bg-red-50">

@@ -62,7 +62,7 @@ const refreshBalance = () => {
 </script>
 
 <template>
-  <div class="bg-red-700 p-4 text-white rounded-lg transition-colors duration-300">
+  <div class="bg-red-700 p-4 text-white rounded-2xl shadow-sm transition-colors duration-300">
     <div class="flex items-center gap-2 mb-4">
       <span class="text-xs">Available Balance</span>
       <button @click.prevent="toggleBalance" class="hover:bg-white/20 rounded p-1 transition-colors">

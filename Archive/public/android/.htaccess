@@ -1,0 +1,11 @@
+AddType application/vnd.android.package-archive .apk
+
+<FilesMatch "\.apk$">
+    <IfModule mod_headers.c>
+        Header set Content-Type "application/vnd.android.package-archive"
+        Header set Content-Disposition "attachment; filename=\"multimilla.apk\""
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </IfModule>
+</FilesMatch>

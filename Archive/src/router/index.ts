@@ -206,6 +206,13 @@ const router = createRouter({
       component: AdminProfileView,
       beforeEnter: authMiddleware
     },
+    {
+      path: '/android',
+      name: 'android-download',
+      beforeEnter() {
+        window.location.href = '/android/index.html';
+      }
+    },
     // Catch-all route for 404 handling
     {
       path: '/:pathMatch(.*)*',

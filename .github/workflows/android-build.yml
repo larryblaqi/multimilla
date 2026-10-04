@@ -39,24 +39,41 @@ jobs:
           cd Archive
           npx cap sync android
 
+      - name: Setup Release Keystore
+        run: |
+          cd Archive/android/app
+          if [ ! -f release.keystore ]; then
+            keytool -genkeypair -v -keystore release.keystore -alias multimilla \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -storepass multimillasecure -keypass multimillasecure \
+              -dname "CN=Multimilla, OU=Mobile, O=Multimilla Technologies, L=Lagos, ST=Lagos, C=NG"
+          fi
+
       - name: Grant Execute Permission to Gradle Wrapper
         run: chmod +x Archive/android/gradlew
 
-      - name: Build Android APK Package
+      - name: Build Android Release APK Package
         run: |
           cd Archive/android
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleRelease --stacktrace
 
       - name: Copy Built APK to Release Location
         run: |
           mkdir -p lsapp/public/android
           mkdir -p Archive/public/android
-          cp Archive/android/app/build/outputs/apk/debug/app-debug.apk lsapp/public/android/multimilla.apk
-          cp Archive/android/app/build/outputs/apk/debug/app-debug.apk Archive/public/android/multimilla.apk
+          mkdir -p Archive/dist/android
+          APK_PATH=$(find Archive/android/app/build/outputs/apk/release -name "*.apk" | head -n 1)
+          if [ -z "$APK_PATH" ]; then
+            APK_PATH=$(find Archive/android/app/build/outputs/apk -name "*.apk" | head -n 1)
+          fi
+          echo "Found built APK: $APK_PATH"
+          cp "$APK_PATH" lsapp/public/android/multimilla.apk
+          cp "$APK_PATH" Archive/public/android/multimilla.apk
+          cp "$APK_PATH" Archive/dist/android/multimilla.apk
 
       - name: Upload Android APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multimilla-android-app
-          path: Archive/android/app/build/outputs/apk/debug/app-debug.apk
+          path: Archive/public/android/multimilla.apk
 

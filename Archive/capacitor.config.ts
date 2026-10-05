@@ -2,7 +2,7 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.multimilla.app',
-  appName: 'Multimilla',
+  appName: 'multimilla',
   webDir: 'dist',
   server: {
     url: 'https://app.multimilla.com',

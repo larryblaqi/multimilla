@@ -1,7 +1,12 @@
 {
 	"appId": "com.multimilla.app",
-	"appName": "Multimilla",
+	"appName": "multimilla",
 	"webDir": "dist",
+	"server": {
+		"url": "https://app.multimilla.com",
+		"androidScheme": "https",
+		"cleartext": false
+	},
 	"plugins": {
 		"Keyboard": {
 			"resize": "body",

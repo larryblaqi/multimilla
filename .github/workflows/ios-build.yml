@@ -34,14 +34,47 @@ jobs:
           cd Archive/ios/App
           pod install
 
-      - name: Build iOS Xcode Project
+      - name: Build iOS Xcode Project (Pre-Signing Stage)
         run: |
           cd Archive/ios/App
-          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -sdk iphoneos -allowProvisioningUpdates || true
+          xcodebuild clean build \
+            -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGN_STYLE=Manual \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGN_ENTITLEMENTS="" \
+            BUILD_DIR=build \
+            SYMROOT=build
 
-      - name: Upload iOS Build Artifact
+      - name: Package Unsigned iOS IPA
+        run: |
+          cd Archive/ios/App
+          APP_PATH=$(find build -name "App.app" -type d | head -n 1)
+          echo "Found built App bundle at: $APP_PATH"
+          mkdir -p build_output/Payload
+          cp -R "$APP_PATH" build_output/Payload/
+          cd build_output
+          zip -r multimilla-unsigned.ipa Payload
+          cd ../../..
+          mkdir -p lsapp/public/ios
+          mkdir -p Archive/public/ios
+          mkdir -p Archive/dist/ios
+          cp Archive/ios/App/build_output/multimilla-unsigned.ipa lsapp/public/ios/multimilla-unsigned.ipa
+          cp Archive/ios/App/build_output/multimilla-unsigned.ipa Archive/public/ios/multimilla-unsigned.ipa
+          cp Archive/ios/App/build_output/multimilla-unsigned.ipa Archive/dist/ios/multimilla-unsigned.ipa
+
+      - name: Upload Unsigned IPA Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: multimilla-ios-ipa
+          path: Archive/public/ios/multimilla-unsigned.ipa
+
+      - name: Upload iOS Xcode Project Artifact
         uses: actions/upload-artifact@v4
         with:
           name: multimilla-ios-app
           path: Archive/ios/App
-

@@ -1,7 +1,12 @@
 {
 	"appId": "com.multimilla.app",
-	"appName": "Multimilla",
+	"appName": "multimilla",
 	"webDir": "dist",
+	"server": {
+		"url": "https://app.multimilla.com",
+		"androidScheme": "https",
+		"cleartext": false
+	},
 	"plugins": {
 		"Keyboard": {
 			"resize": "body",
@@ -10,7 +15,7 @@
 		"SplashScreen": {
 			"launchShowDuration": 2000,
 			"launchAutoHide": true,
-			"backgroundColor": "#d13520",
+			"backgroundColor": "#ffffff",
 			"androidSplashResourceName": "splash",
 			"androidScaleType": "CENTER_CROP",
 			"showSpinner": false,
@@ -21,7 +26,7 @@
 		},
 		"StatusBar": {
 			"backgroundColor": "#ffffff",
-			"style": "LIGHT",
+			"style": "DARK",
 			"overlaysWebView": false
 		}
 	}

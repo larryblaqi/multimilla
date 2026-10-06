@@ -29,10 +29,11 @@ jobs:
           npm run build
           npx cap sync ios
 
-      - name: Install CocoaPods
+      - name: Install CocoaPods & Fix Script Permissions
         run: |
           cd Archive/ios/App
           pod install
+          find Pods -name "*.sh" -exec chmod +x {} +
 
       - name: Build iOS Xcode App (Final Stage Before Signing)
         run: |

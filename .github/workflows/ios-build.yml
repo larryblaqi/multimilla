@@ -51,26 +51,25 @@ jobs:
             2>&1 | tee xcodebuild.log
 
       - name: Package Unsigned iOS IPA
-        if: always()
         run: |
           cd Archive/ios/App
           APP_PATH=$(find build_derived -name "App.app" -type d | head -n 1)
-          if [ -n "$APP_PATH" ]; then
-            echo "Found built App bundle at: $APP_PATH"
-            mkdir -p build_output/Payload
-            cp -R "$APP_PATH" build_output/Payload/
-            cd build_output
-            zip -r multimilla-unsigned.ipa Payload
-            cd ../../..
-            mkdir -p lsapp/public/ios
-            mkdir -p Archive/public/ios
-            mkdir -p Archive/dist/ios
-            cp Archive/ios/App/build_output/multimilla-unsigned.ipa lsapp/public/ios/multimilla-unsigned.ipa
-            cp Archive/ios/App/build_output/multimilla-unsigned.ipa Archive/public/ios/multimilla-unsigned.ipa
-            cp Archive/ios/App/build_output/multimilla-unsigned.ipa Archive/dist/ios/multimilla-unsigned.ipa
-          else
-            echo "App.app was not created."
+          if [ -z "$APP_PATH" ]; then
+            echo "ERROR: App.app was not created!"
+            exit 1
           fi
+          echo "Found built App bundle at: $APP_PATH"
+          mkdir -p build_output/Payload
+          cp -R "$APP_PATH" build_output/Payload/
+          cd build_output
+          zip -r multimilla-unsigned.ipa Payload
+          
+          mkdir -p "$GITHUB_WORKSPACE/lsapp/public/ios"
+          mkdir -p "$GITHUB_WORKSPACE/Archive/public/ios"
+          mkdir -p "$GITHUB_WORKSPACE/Archive/dist/ios"
+          cp multimilla-unsigned.ipa "$GITHUB_WORKSPACE/lsapp/public/ios/multimilla-unsigned.ipa"
+          cp multimilla-unsigned.ipa "$GITHUB_WORKSPACE/Archive/public/ios/multimilla-unsigned.ipa"
+          cp multimilla-unsigned.ipa "$GITHUB_WORKSPACE/Archive/dist/ios/multimilla-unsigned.ipa"
 
       - name: Upload Build Log Artifact
         if: always()

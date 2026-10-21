@@ -257,7 +257,7 @@ onUnmounted(() => {
 
 <template>
   <div class="min-h-screen bg-gray-50">
-    <div class="sticky top-0 z-10 bg-white border-b border-gray-200">
+    <div class="sticky top-0 z-10 bg-white border-b border-gray-200 safe-area-top">
       <AirtimeHeader @back="goBack" @history="goToHistory" />
     </div>
     <main class="px-4 md:px-6 lg:px-8 max-w-3xl mx-auto space-y-6">

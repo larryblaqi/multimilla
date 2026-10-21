@@ -1,9 +1,14 @@
 <template>
   <div class="min-h-screen bg-gray-50">
-    <div class="sticky top-0 z-10 bg-white border-b border-gray-200">
-      <div class="flex items-center justify-between p-4">
-        <button @click="goBack" class="p-2 hover:bg-gray-100 rounded-full">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="sticky top-0 z-10 bg-white border-b border-gray-200 safe-area-top">
+      <div class="flex items-center justify-between px-4 py-3">
+        <button 
+          type="button"
+          @click="goBack" 
+          class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
+          aria-label="Go Back"
+        >
+          <svg class="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>

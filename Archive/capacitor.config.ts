@@ -9,10 +9,15 @@ const config: CapacitorConfig = {
     androidScheme: 'https',
     cleartext: false,
   },
+  ios: {
+    contentInset: 'automatic',
+    scrollEnabled: true,
+  },
   plugins: {
     Keyboard: {
-      resize: 'body',
-      style: 'dark',
+      resize: 'native',
+      style: 'DARK',
+      resizeOnFullScreen: true,
     },
     SplashScreen: {
       launchShowDuration: 2000,

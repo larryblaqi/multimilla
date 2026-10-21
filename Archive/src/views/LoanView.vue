@@ -239,12 +239,17 @@ onMounted(async () => {
 <template>
   <div class="min-h-screen bg-gray-50">
     <!-- Header -->
-    <header class="flex items-center justify-between px-4 py-4 bg-white border-b sticky top-0 z-10">
-      <div class="flex items-center gap-3">
-        <button @click="goBack" class="p-1 rounded-full hover:bg-gray-100">
-          <ArrowLeftIcon class="w-5 h-5 text-gray-700" />
+    <header class="flex items-center justify-between px-4 py-3 bg-white border-b sticky top-0 z-10 safe-area-top">
+      <div class="flex items-center gap-2">
+        <button 
+          type="button"
+          @click="goBack" 
+          class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
+          aria-label="Go Back"
+        >
+          <ArrowLeftIcon class="w-6 h-6 text-gray-700" />
         </button>
-        <h1 class="font-semibold text-gray-900">Loans</h1>
+        <h1 class="text-lg font-semibold text-gray-900">Loans</h1>
       </div>
       <button
         @click="viewMyApplications"

@@ -7,9 +7,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Called when a new scene session is being created.
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         guard let _ = (scene as? UIWindowScene) else { return }
+
+        // Enable iOS native swipe-to-go-back edge navigation gesture
+        DispatchQueue.main.async {
+            if let rootVC = self.window?.rootViewController as? CAPBridgeViewController {
+                rootVC.webView?.allowsBackForwardNavigationGestures = true
+            }
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -17,7 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
+        // Ensure web view navigation gestures remain active on resume
+        if let rootVC = self.window?.rootViewController as? CAPBridgeViewController {
+            rootVC.webView?.allowsBackForwardNavigationGestures = true
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

@@ -51,3 +51,62 @@ body {
 .active\:opacity-70:active {
   opacity: 0.7;
 }
+
+/* ────────────────────────────────────────────────────────────
+   iOS Safe Area & Sticky Header Support
+   ──────────────────────────────────────────────────────────── */
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+/* Universal safe area utility classes */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+}
+
+/* Ensure top-level sticky headers automatically clear iOS notch / Dynamic Island */
+.sticky.top-0:not(.fixed *),
+header.sticky.top-0,
+header.fixed.top-0 {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+}
+
+/* Prevent double padding when an inner header is inside an already-padded sticky container */
+.sticky.top-0 .safe-area-top,
+.sticky.top-0 header.safe-area-top {
+  padding-top: 0 !important;
+}
+
+/* Modals and bottom sheets: keep original padding */
+.fixed.inset-0 .sticky.top-0,
+.fixed.inset-0 header.sticky.top-0 {
+  padding-top: initial !important;
+}
+
+/* Header buttons & back buttons: meet Apple Human Interface Guidelines min touch target (44x44px) */
+header button,
+.safe-area-top button,
+.sticky.top-0 button,
+button.back-btn,
+.back-button {
+  min-width: 44px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smartsupp Live Chat widget safe area padding for iOS */
+#smartsupp-widget,
+iframe[src*="smartsupp"] {
+  padding-top: env(safe-area-inset-top, 0px) !important;
+}

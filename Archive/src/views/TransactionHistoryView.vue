@@ -231,20 +231,27 @@ onMounted(() => customerStore.fetchCustomer());
   <div class="min-h-screen bg-gray-50">
 
     <!-- ─── Header ──────────────────────────────────────────────────────────── -->
-    <header class="sticky top-0 z-20 bg-white border-b border-gray-100 shadow-sm">
-      <div class="flex items-center gap-3 px-4 py-4">
-        <button @click="goBack" class="p-1.5 rounded-full hover:bg-gray-100 transition-colors">
-          <ArrowLeftIcon class="w-5 h-5 text-gray-700" />
+    <header class="sticky top-0 z-20 bg-white border-b border-gray-100 shadow-sm safe-area-top">
+      <div class="flex items-center gap-2 px-4 py-3">
+        <button 
+          type="button"
+          @click="goBack" 
+          class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
+          aria-label="Go Back"
+        >
+          <ArrowLeftIcon class="w-6 h-6 text-gray-700" />
         </button>
         <h1 class="text-lg font-bold text-gray-900 flex-1">Transaction History</h1>
         <button
+          type="button"
           @click="showFilters = !showFilters"
-          class="relative p-2 rounded-xl hover:bg-gray-100 transition-colors"
+          class="relative w-11 h-11 rounded-xl flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
+          aria-label="Filter Transactions"
         >
           <FunnelIcon class="w-5 h-5 text-gray-600" />
           <span
             v-if="activeFilterCount"
-            class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
+            class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-bold rounded-full flex items-center justify-center"
           >{{ activeFilterCount }}</span>
         </button>
       </div>

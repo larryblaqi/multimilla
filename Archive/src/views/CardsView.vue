@@ -235,10 +235,15 @@ const formatCardNumber = (pan, visible) => {
     </Teleport>
 
     <!-- Header -->
-    <header class="sticky top-0 z-20 bg-slate-900/85 backdrop-blur-xl border-b border-slate-800">
-      <div class="flex items-center justify-between p-4 max-w-md mx-auto">
-        <div class="flex items-center gap-3">
-          <button @click="goBack" class="p-2 hover:bg-slate-800 rounded-full transition-colors">
+    <header class="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 safe-area-top">
+      <div class="flex items-center justify-between px-4 py-3 max-w-md mx-auto">
+        <div class="flex items-center gap-2">
+          <button 
+            type="button"
+            @click="goBack" 
+            class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center hover:bg-slate-800 active:bg-slate-700 transition-colors touch-manipulation cursor-pointer"
+            aria-label="Go Back"
+          >
             <ArrowLeftIcon class="w-6 h-6 text-slate-300" />
           </button>
           <h1 class="text-lg font-bold text-white tracking-wide">Cards & Virtual Pay</h1>

@@ -252,6 +252,17 @@ const hideKeyboard = async () => {
 };
 
 onMounted(async () => {
+  // If user already has an active session token, immediately enter wallet without logging in again
+  try {
+    const { value: authToken } = await Preferences.get({ key: "token" });
+    if (authToken) {
+      router.replace("/wallet");
+      return;
+    }
+  } catch (err) {
+    console.error("Token verification error on Login mount:", err);
+  }
+
   if (Capacitor.isNativePlatform()) {
     try {
       await Keyboard.hide();

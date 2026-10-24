@@ -7,6 +7,10 @@
 		"androidScheme": "https",
 		"cleartext": false
 	},
+	"ios": {
+		"contentInset": "never",
+		"scrollEnabled": true
+	},
 	"plugins": {
 		"Keyboard": {
 			"resize": "native",

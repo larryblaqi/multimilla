@@ -232,36 +232,39 @@ const viewMyApplications = async () => {
 }
 
 onMounted(async () => {
+  window.scrollTo(0, 0);
   await Promise.all([fetchLoanProducts(), fetchLoanApplications()])
 })
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
-    <header class="flex items-center justify-between px-4 py-3 bg-white border-b sticky top-0 z-10 safe-area-top">
-      <div class="flex items-center gap-2">
-        <button 
-          type="button"
-          @click="goBack" 
-          class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
-          aria-label="Go Back"
+    <!-- Header Wrapper -->
+    <div class="sticky top-0 z-10 bg-white border-b border-gray-200 safe-area-top">
+      <header class="flex items-center justify-between px-4 py-3 bg-white">
+        <div class="flex items-center gap-2">
+          <button 
+            type="button"
+            @click="goBack" 
+            class="w-11 h-11 -ml-2 rounded-full flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
+            aria-label="Go Back"
+          >
+            <ArrowLeftIcon class="w-6 h-6 text-gray-700" />
+          </button>
+          <h1 class="text-lg font-semibold text-gray-900">Loans</h1>
+        </div>
+        <button
+          @click="viewMyApplications"
+          class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-700 rounded-lg text-sm font-medium border border-red-200"
         >
-          <ArrowLeftIcon class="w-6 h-6 text-gray-700" />
+          <DocumentTextIcon class="w-4 h-4" />
+          My Applications
+          <span v-if="pendingApplicationsCount" class="ml-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
+            {{ pendingApplicationsCount }}
+          </span>
         </button>
-        <h1 class="text-lg font-semibold text-gray-900">Loans</h1>
-      </div>
-      <button
-        @click="viewMyApplications"
-        class="flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-700 rounded-lg text-sm font-medium border border-red-200"
-      >
-        <DocumentTextIcon class="w-4 h-4" />
-        My Applications
-        <span v-if="pendingApplicationsCount" class="ml-1 bg-red-600 text-white text-xs px-1.5 py-0.5 rounded-full">
-          {{ pendingApplicationsCount }}
-        </span>
-      </button>
-    </header>
+      </header>
+    </div>
 
     <main class="max-w-3xl mx-auto px-4 py-6 space-y-6">
 

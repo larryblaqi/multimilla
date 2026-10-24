@@ -63,6 +63,7 @@ const fetchCards = async () => {
 }
 
 onMounted(async () => {
+  window.scrollTo(0, 0);
   if (customerStore.fetchCustomer) {
     await customerStore.fetchCustomer()
   }
@@ -234,9 +235,9 @@ const formatCardNumber = (pan, visible) => {
       </Transition>
     </Teleport>
 
-    <!-- Header -->
-    <header class="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 safe-area-top">
-      <div class="flex items-center justify-between px-4 py-3 max-w-md mx-auto">
+    <!-- Header Wrapper -->
+    <div class="sticky top-0 z-20 bg-slate-900/95 backdrop-blur-xl border-b border-slate-800 safe-area-top">
+      <header class="flex items-center justify-between px-4 py-3 max-w-md mx-auto">
         <div class="flex items-center gap-2">
           <button 
             type="button"
@@ -248,8 +249,8 @@ const formatCardNumber = (pan, visible) => {
           </button>
           <h1 class="text-lg font-bold text-white tracking-wide">Cards & Virtual Pay</h1>
         </div>
-      </div>
-    </header>
+      </header>
+    </div>
 
     <main class="p-4 space-y-6 max-w-md mx-auto mt-2">
       <!-- Active Dashboard View -->

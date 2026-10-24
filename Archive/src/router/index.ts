@@ -34,21 +34,37 @@ import DashboardLayout from '../layouts/DashboardLayouts.vue';
 
 
 import { authMiddleware } from '../middlewares';
+import { Preferences } from '@capacitor/preferences';
+
+const guestOnlyMiddleware = async (to: any, from: any, next: any) => {
+  try {
+    const { value: authToken } = await Preferences.get({ key: "token" });
+    if (authToken) {
+      return next({ path: '/wallet' });
+    }
+  } catch (e) {
+    console.error('Error checking auth token in guestOnlyMiddleware:', e);
+  }
+  next();
+};
 
 const router = createRouter({
   history: createWebHistory(),
+  scrollBehavior(to, from, savedPosition) {
+    return { top: 0, left: 0 };
+  },
   routes: [
     {
       path: '/',
       name: 'login',
       component: LoginView,
-
+      beforeEnter: guestOnlyMiddleware,
     },
     {
       path: '/login',
       name: 'login-auth',
       component: LoginView,
-
+      beforeEnter: guestOnlyMiddleware,
     },
     {
       path: '/join',
@@ -222,5 +238,13 @@ const router = createRouter({
 
   ]
 })
+
+router.afterEach(() => {
+  window.scrollTo(0, 0);
+  if (typeof document !== 'undefined') {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+});
 
 export default router

@@ -8,7 +8,7 @@
 		"cleartext": false
 	},
 	"ios": {
-		"contentInset": "automatic",
+		"contentInset": "never",
 		"scrollEnabled": true
 	},
 	"plugins": {

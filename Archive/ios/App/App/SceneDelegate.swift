@@ -9,10 +9,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called when a new scene session is being created.
         guard let _ = (scene as? UIWindowScene) else { return }
 
-        // Enable iOS native swipe-to-go-back edge navigation gesture
+        // Explicitly disable iOS swipe-to-navigate back and forward gestures
         DispatchQueue.main.async {
             if let rootVC = self.window?.rootViewController as? CAPBridgeViewController {
-                rootVC.webView?.allowsBackForwardNavigationGestures = true
+                rootVC.webView?.allowsBackForwardNavigationGestures = false
+                rootVC.webView?.scrollView.contentInsetAdjustmentBehavior = .never
             }
         }
     }
@@ -22,9 +23,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Ensure web view navigation gestures remain active on resume
+        // Keep web view navigation gestures disabled on resume
         if let rootVC = self.window?.rootViewController as? CAPBridgeViewController {
-            rootVC.webView?.allowsBackForwardNavigationGestures = true
+            rootVC.webView?.allowsBackForwardNavigationGestures = false
+            rootVC.webView?.scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
 

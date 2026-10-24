@@ -1,0 +1,48 @@
+name: Publish iOS Release v1.5.2
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact from Build Run
+        uses: actions/download-artifact@v4
+        with:
+          name: multimilla-ios-ipa
+          run-id: 40121944316
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: ipa_artifact
+
+      - name: Inspect Extracted Files
+        run: |
+          ls -la ipa_artifact
+          find ipa_artifact -name "*.ipa"
+
+      - name: Create GitHub Release v1.5.2
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.5.2
+          target_commitish: main
+          name: multimilla Mobile v1.5.2 — iOS Navigation, Static Headers & Session Persistence
+          body: |
+            ## multimilla v1.5.2 — iOS Navigation & Header Fix
+
+            ### Fixes & Improvements on iOS:
+            1. **Disabled Edge Swipe Back/Forward Navigation**:
+               - Disabled `allowsBackForwardNavigationGestures` across all WebViews to restore full security and prevent accidental/unauthorized swipe history navigation.
+            2. **Fixed Loan & Cards Page Headers**:
+               - Loan and Card views now feature fixed, static headers with clearly visible back buttons at the top of the viewport (matching Fixed Deposit, Withdraw, Contribution, and Bills).
+               - Removed automatic content inset shifts; users no longer need to drag or pull down to reveal the back button.
+            3. **Session Persistence on Back-to-Login**:
+               - Users who navigate back towards the login route while already authenticated are automatically redirected straight to the Wallet dashboard without having to re-authenticate.
+            4. **Keyboard & Scroll Behavior**:
+               - Up/down scrolling behavior for keyboard dismissal and comfortable action button tapping is fully maintained.
+
+            ### Direct Download (No Sign-in Required):
+            - **[multimilla-unsigned.ipa](https://github.com/larryblaqi/multimilla/releases/download/v1.5.2/multimilla-unsigned.ipa)** — iOS Unsigned App
+          files: ipa_artifact/**/*.ipa

@@ -56,26 +56,27 @@ body {
    iOS Safe Area & Sticky Header Support
    ──────────────────────────────────────────────────────────── */
 :root {
+  /* Default safe area top fallback for iOS notch/Dynamic Island devices */
   --sat: env(safe-area-inset-top, 0px);
   --sab: env(safe-area-inset-bottom, 0px);
   --sal: env(safe-area-inset-left, 0px);
   --sar: env(safe-area-inset-right, 0px);
 }
 
-/* Universal safe area utility classes */
+/* Universal safe area utility classes with max() fallback for iOS devices */
 .safe-area-top {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-top: max(44px, env(safe-area-inset-top, 0px)) !important;
 }
 
 .safe-area-bottom {
-  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)) !important;
 }
 
-/* Ensure top-level sticky headers automatically clear iOS notch / Dynamic Island */
+/* Ensure all sticky and fixed top-level headers clear the status bar on mobile */
 .sticky.top-0:not(.fixed *),
 header.sticky.top-0,
 header.fixed.top-0 {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  padding-top: max(44px, env(safe-area-inset-top, 0px)) !important;
 }
 
 /* Prevent double padding when an inner header is inside an already-padded sticky container */
@@ -107,6 +108,8 @@ button.back-btn,
 
 /* Smartsupp Live Chat widget safe area padding for iOS */
 #smartsupp-widget,
+#smartsupp-chat,
 iframe[src*="smartsupp"] {
-  padding-top: env(safe-area-inset-top, 0px) !important;
+  top: max(48px, env(safe-area-inset-top, 0px)) !important;
+  margin-top: 0 !important;
 }

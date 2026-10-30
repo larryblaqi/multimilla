@@ -6,7 +6,6 @@ import { Keyboard } from "@capacitor/keyboard";
 import { Capacitor } from "@capacitor/core";
 import { App as CapacitorApp } from "@capacitor/app";
 
-// Configure StatusBar
 async function configureStatusBar() {
   if (Capacitor.isNativePlatform()) {
     try {
@@ -15,6 +14,7 @@ async function configureStatusBar() {
         await StatusBar.setBackgroundColor({ color: "#ffffff" });
       } else if (Capacitor.getPlatform() === "ios") {
         await StatusBar.setStyle({ style: Style.Dark });
+        await StatusBar.setOverlaysWebView({ overlay: false }).catch(() => {});
       }
       console.log("✅ StatusBar configured successfully");
     } catch (error) {

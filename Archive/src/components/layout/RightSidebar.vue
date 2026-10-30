@@ -128,11 +128,11 @@ const getNotificationClass = (isFirst, isLast) => {
   >
     <div class="h-full flex flex-col">
       <div
-        class="p-4 border-b border-gray-200 flex justify-between items-center bg-white/95 backdrop-blur sticky top-0 z-10"
+        class="p-4 border-b border-gray-200 flex justify-between items-center bg-white/95 backdrop-blur sticky top-0 z-10 safe-area-top"
       >
         <h2 class="font-semibold text-gray-800 text-lg">Recent Messages</h2>
         <button
-          class="p-2 rounded-full hover:bg-gray-100 transition-colors"
+          class="min-w-[44px] min-h-[44px] rounded-full hover:bg-gray-100 flex items-center justify-center transition-colors"
           @click.prevent="closeSidebar"
         >
           <XMarkIcon class="h-6 w-6 text-gray-600" />

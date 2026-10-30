@@ -273,18 +273,21 @@ const transactionDetails = computed(() => {
 <template>
   <div class="max-w-md mx-auto bg-white">
     <!-- Header -->
-    <div class="flex items-center justify-between p-4 border-b ">
-      <button
-        @click="emit('back')"
-        class="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
-      >
-        <ArrowLeftIcon class="w-5 h-5" />
-        <span class="text-sm font-medium">Back</span>
-      </button>
-      <h1 class="text-lg font-semibold text-gray-900">Transaction Details</h1>
-      <div class="w-16"></div>
-      <!-- Spacer for centering -->
-    </div>
+    <header class="sticky top-0 z-20 bg-white border-b border-gray-100 safe-area-top">
+      <div class="flex items-center justify-between px-4 py-3">
+        <button
+          type="button"
+          @click="emit('back')"
+          class="min-w-[44px] min-h-[44px] -ml-2 rounded-full flex items-center justify-center hover:bg-gray-100 active:bg-gray-200 transition-colors touch-manipulation cursor-pointer"
+          aria-label="Back"
+        >
+          <ArrowLeftIcon class="w-6 h-6 text-gray-700" />
+        </button>
+        <h1 class="text-lg font-bold text-gray-900 flex-1 text-center -ml-2">Transaction Details</h1>
+        <div class="w-10"></div>
+        <!-- Spacer for centering -->
+      </div>
+    </header>
 
     <!-- Transaction Summary Card -->
     <div class="p-6">

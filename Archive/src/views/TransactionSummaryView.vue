@@ -101,22 +101,12 @@ onMounted(async () => {
 
 <template>
   <div class="min-h-screen bg-white">
-    <div class="lg:hidden">
-      <TransactionHistoryHeader @back="goBack" />
-    </div>
-
-    <main class="p-4 max-w-2xl mx-auto">
+    <main class="max-w-2xl mx-auto">
       <!-- Transaction Summary View -->
-      <div>
-        <TransactionSummary
-          :transaction="selectedTransaction"
-          @back="handleBackToList"
-        />
-      </div>
+      <TransactionSummary
+        :transaction="selectedTransaction"
+        @back="handleBackToList"
+      />
     </main>
-
-    <!-- <div class="lg:hidden">
-      <TransactionHistoryFooter />
-    </div> -->
   </div>
 </template>

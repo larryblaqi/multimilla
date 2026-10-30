@@ -13,7 +13,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.main.async {
             if let rootVC = self.window?.rootViewController as? CAPBridgeViewController {
                 rootVC.webView?.allowsBackForwardNavigationGestures = false
-                rootVC.webView?.scrollView.contentInsetAdjustmentBehavior = .never
             }
         }
     }
@@ -26,7 +25,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Keep web view navigation gestures disabled on resume
         if let rootVC = self.window?.rootViewController as? CAPBridgeViewController {
             rootVC.webView?.allowsBackForwardNavigationGestures = false
-            rootVC.webView?.scrollView.contentInsetAdjustmentBehavior = .never
         }
     }
 

@@ -8,6 +8,8 @@ on:
 jobs:
   build-ios:
     runs-on: macos-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Code
@@ -91,3 +93,26 @@ jobs:
         with:
           name: multimilla-ios-app
           path: Archive/ios/App
+
+      - name: Create or Update GitHub Release v1.5.3
+        if: success()
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.5.3
+          target_commitish: main
+          name: multimilla Mobile v1.5.3 — iOS Status Bar Header Spacing & Safe Area Fix
+          body: |
+            ## multimilla v1.5.3 — iOS Status Bar Header Spacing & Safe Area Fix
+
+            ### Fixes & Improvements on iOS:
+            1. **Shifted Page Content Below Status Bar**:
+               - All page headers, back buttons, and titles across Transaction Details, Transaction History, Cards & Virtual Pay, Loans, and other pages now have guaranteed minimum `44px` clearance (`max(44px, env(safe-area-inset-top))`).
+               - The top banner and back buttons are positioned clearly below the status bar clock, network icons, and battery indicator so they are completely unobstructed, visible, and easy to tap.
+            2. **Enhanced WKWebView Inset Handling**:
+               - Restored automatic content inset adjustments on iOS so the native status bar space and `env(safe-area-inset-top)` are correctly respected.
+            3. **Live Chat Safe Offset**:
+               - Configured Smartsupp live chat modal positioning to avoid status bar overlap.
+
+            ### Direct Download (No Sign-in Required):
+            - **[multimilla-unsigned.ipa](https://github.com/larryblaqi/multimilla/releases/download/v1.5.3/multimilla-unsigned.ipa)** — iOS Unsigned App
+          files: Archive/public/ios/multimilla-unsigned.ipa
